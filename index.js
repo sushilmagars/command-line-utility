@@ -22,6 +22,7 @@ program
                 let row = 0;
                 let isFileEnd = false;
                 
+                // if its not file end, go to next row in the file
                 while (!isFileEnd) {
                     let fileOneContent;
                     let fileTwoContent;
@@ -39,6 +40,7 @@ program
                             result.push(fileOneContent[column]);
                             column++;
 
+                            // read each row
                             while (!isFileRowEnd) {
                                 const fileOne = fileOneContent[column];
                                 const fileTwo = fileTwoContent[column];
