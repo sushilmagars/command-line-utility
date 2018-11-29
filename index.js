@@ -16,12 +16,6 @@ program
             const firstFileContent = readFile(firstFileName);
             const secondFileContent = readFile(secondFileName);
 
-            console.log(firstFileContent)
-            console.log('=======')
-            console.log(secondFileContent)
-            console.log('=======')
-            console.log(program.firstField)
-            console.log(program.secondField)
 
             // If common elements exists
             if (firstFileContent && secondFileContent) {
@@ -44,11 +38,11 @@ program
         
                             result.push(fileOneContent[column]);
                             column++;
-        
+
                             while (!isFileRowEnd) {
                                 const fileOne = fileOneContent[column];
                                 const fileTwo = fileTwoContent[column];
-        
+
                                 if (fileOne && fileTwo) {
                                     result.push(fileOne, fileTwo);
                                     column++;
@@ -68,6 +62,8 @@ program
                         } else {
                             isFileEnd = true;
                         }
+                    } else {
+                        isFileEnd = true;
                     }
                 }
             }
