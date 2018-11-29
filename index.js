@@ -58,7 +58,7 @@ program
                                 }
                             }
         
-                            console.log(result);
+                            console.log(result.join(' '));
                         } else {
                             isFileEnd = true;
                         }
