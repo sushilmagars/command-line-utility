@@ -1,2 +1,2 @@
-# command-line-utility
-Command line utility in Node
+# Command line utility
+Built `join` command in node
