@@ -8,7 +8,7 @@ class JoinUtility {
 
     parseInteger(val, field) {
         if (Number.isNaN(Number.parseInt(val))) {
-            throw new Error(`Should be an integer after ${field}`);
+            throw new Error(`Position to read should be an integer after ${field}`);
         }
     }
 
