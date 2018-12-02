@@ -43,6 +43,11 @@ $ joins -1 1 -2 1 one.txt two.txt
 Blue Purple Green!
 Blue Purple Yellow Brown!
 ```
+4. Run tests using - 
+```
+npm test
+```
+
 
 
 
