@@ -5,7 +5,7 @@ const fs = require('fs');
 class JoinUtility {
     constructor() {}
 
-    parseInteger(val, field) {
+    static parseInteger(val, field) {
         if (Number.isNaN(Number.parseInt(val))) {
             throw new Error(`Position to read should be an integer after ${field}`);
         }
@@ -32,7 +32,7 @@ class JoinUtility {
      *              ->> If not same, go to next row on first file and repeat step b
      *      3b. If string are not same, return result.
      */
-    process() {
+    static process() {
         try {
             program
             .arguments('<firstFileName>') 
@@ -119,6 +119,7 @@ class JoinUtility {
             .parse(process.argv);
         } catch (err) {
             console.log(err.message)
+            return err;
         }
     }
 }
