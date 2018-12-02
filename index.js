@@ -6,9 +6,9 @@ const fs = require('fs');
 class JoinUtility {
     constructor() {}
 
-    parseInteger(val) {
+    parseInteger(val, field) {
         if (Number.isNaN(Number.parseInt(val))) {
-            throw new Error('Should be an integer');
+            throw new Error(`Should be an integer after ${field}`);
         }
     }
 
@@ -38,8 +38,8 @@ class JoinUtility {
             program
             .arguments('<firstFileName>') 
             .arguments('<secondFileName>')
-            .option('-1 firstfilestartposition <n>', 'integer', this.parseInteger)
-            .option('-2 secondfilestartposition <n>', 'integer', this.parseInteger)
+            .option('-1 firstfilestartposition <n>', 'integer', this.parseInteger, -1)
+            .option('-2 secondfilestartposition <n>', 'integer', this.parseInteger, -2)
             .action(function(firstFileName, secondFileName) {
                     const readFile = (filename) => fs.readFileSync(filename, {encoding: 'utf8'}).split('\n');
                     
