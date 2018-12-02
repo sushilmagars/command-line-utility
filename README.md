@@ -36,5 +36,13 @@ $ joins -2 one.txt two.txt
 Position to read should be an integer after -2
 ```
 
+```
+Test case: Correct options are passed in
+
+$ joins -1 1 -2 1 one.txt two.txt
+Blue Purple Green!
+Blue Purple Yellow Brown!
+```
+
 
 
