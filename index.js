@@ -3,6 +3,26 @@
 const program = require('commander');
 const fs = require('fs');
 
+/**
+ * [A] Read both files
+ *      a. If no options are passed in
+ *          1a. If strings are same
+ *               -> concat sentence on first file with the sentence on second file by exluding common string
+ *               -> go to next row on second file
+ *               -> check if the string on the second file also matches first string of the first file
+ *                   ->> If same, repeat step 1a
+ *                   ->> If not same, go to next row on first file and repeat step a
+ *           2a. If string are not same, return result.
+ *      b. If -1 and -2 options are passed in
+ *          1b. Start reading both files from given position e.g. -1 2 means start reading first file from 2nd word
+ *          2b. If strings are same on both first and second file
+ *               -> concat sentence on first file with the sentence on second file by exluding common string
+ *               -> go to next row on second file
+ *               -> check if the string on the second file also matches first string of the first file
+ *                   ->> If same, repeat step 2b
+ *                   ->> If not same, go to next row on first file and repeat step b
+ *           3b. If string are not same, return result.
+ */
 program
     .arguments('<firstFileName>') 
     .arguments('<secondFileName>')
@@ -10,26 +30,6 @@ program
     .option('-2, --secondfilestartposition <n>', 'An integer argument', Number.parseInt)
     .action(function(firstFileName, secondFileName) {
         try {
-            /**
-             * [A] Read both files
-             *      a. If no options are passed in
-             *          1a. If strings are same
-             *               -> concat sentence on first file with the sentence on second file by exluding common string
-             *               -> go to next row on second file
-             *               -> check if the string on the second file also matches first string of the first file
-             *                   ->> If same, repeat step 1a
-             *                   ->> If not same, go to next row on first file and repeat step a
-             *           2a. If string are not same, return result.
-             *      b. If -1 and -2 options are passed in
-             *          1b. Start reading both files from given position e.g. -1 2 means start reading first file from 2nd word
-             *          2b. If strings are same on both first and second file
-             *               -> concat sentence on first file with the sentence on second file by exluding common string
-             *               -> go to next row on second file
-             *               -> check if the string on the second file also matches first string of the first file
-             *                   ->> If same, repeat step 2b
-             *                   ->> If not same, go to next row on first file and repeat step b
-             *           3b. If string are not same, return result.
-             */
             const readFile = (filename) => fs.readFileSync(filename, {encoding: 'utf8'}).split('\n');
             
             // Read file content from both files
