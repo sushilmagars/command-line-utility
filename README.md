@@ -4,8 +4,30 @@
 3. Open terminal and go the directory where reposiotry is cloned.
 4. Run `npm install`
 3. Run `npm install -g` to link the script to location on our path, this will allow us to use `joins` like other shell commands.
-4. Start using following commands on terminal-
+4. Start using following commands on terminal- 
+
 ```
-joins one.txt two.txt
+Test case: Common strings exist, no options passed in
+
+$ joins one.txt two.txt
+Blue Purple Green!
+Blue Purple Yellow Brown!
 ```
-  
+
+```
+Test case: Common strings do not exist
+
+$ joins oneNoJoinCase.txt twoNoJoinCase.txt
+Nothing could be joined
+```
+
+```
+Test case: Common strings do not exist, but options are passed in
+
+$ joins -2 2 oneJoinCaseFlag.txt twoJoinCaseFlag.txt
+Blue Purple dark Green!
+Blue Purple light Yellow Brown!
+```
+
+
+
