@@ -29,5 +29,12 @@ Blue Purple dark Green!
 Blue Purple light Yellow Brown!
 ```
 
+```
+Test case: Wrong options are passed in
+
+$ joins -2 one.txt two.txt
+Position to read should be an integer after -2
+```
+
 
 
