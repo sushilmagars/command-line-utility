@@ -42,36 +42,35 @@ program
                             sliceRow(fileTwoContent, program.secondfilestartposition - 1) :
                             fileTwoContent; 
 
-                        let column = 0;
                         let isRowEnd = false;
                         
                         while (!isRowEnd) {
-                            if (fileOneContentSliced[column] === fileTwoContentSliced[column]) {
-                                result.push(fileOneContentSliced[column]);
-                                column++;
-
-                                const fileOne = fileOneContentSliced[column];
-                                const fileTwo = fileTwoContentSliced[column];
-
-                                console.log('fileOne: ', fileOne);
-                                console.log('fileTwo: ', fileTwo);
-
-                                if (fileOne && fileTwo) {
-                                    result.push(fileOne, fileTwo);
-                                    column++;
-                                } else if (fileOne && !fileTwo) {
-                                    result.push(fileOne);
-                                    column++;
-                                } else if (!fileOne && fileTwo) {
-                                    result.push(fileTwo);
-                                    column++;
-                                } else {
-                                    secondFileRow++;
-                                    isRowEnd = true;
+                            if (fileOneContentSliced[0] === fileTwoContentSliced[0]) {
+                                let line = '';
+                                const concatLine = (itemToConcat) => {
+                                    return line.concat(itemToConcat);
                                 }
-                            } else {
-                                firstFileRow++;
+
+                                for (let i = 0; i < fileOneContent.length; i++) {
+                                    line = concatLine(fileOneContent[i] + ' ');
+                                }
+
+                                for (let i = 0; i < fileTwoContent.length; i++) {
+                                    if (fileTwoContent[i] !== fileOneContentSliced[0]) {
+                                        line = concatLine(fileTwoContent[i] + ' ');
+                                    }
+                                }
+
+                                result.push(line);
+                                secondFileRow++;
                                 isRowEnd = true;
+                            } else if (firstFileRow !== secondFileRow) {
+                                firstFileRow++;
+                                secondFileRow = firstFileRow;
+                                isRowEnd = true;
+                            } else {
+                                isRowEnd = true;
+                                isFileEnd = true;
                             }
                         }
                     } else {
@@ -79,7 +78,13 @@ program
                     }
                 }
 
-                return result.length ? console.log(result.join(' ')) : console.log('Nothing could be joined');
+                const printResult = (arr) => {
+                    for (let i = 0; i < arr.length; i++) {
+                        console.log(arr[i]);
+                    }
+                }
+
+                return result.length ? printResult(result) : console.log('Nothing could be joined');
             }
         } catch (err) {
             console.log(err.message)
