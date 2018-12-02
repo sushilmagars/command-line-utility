@@ -1,12 +1,6 @@
 'use strict';
-const sinon = require('sinon');
 const chai = require('chai');
 const assert = chai.assert;
-const should = chai.should();
-const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-const {isEqual} = require('lodash');
 
 const JoinUtility = require('./joinUtility');
 
