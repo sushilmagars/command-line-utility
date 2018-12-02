@@ -13,44 +13,48 @@ program
             const readFile = (filename) => fs.readFileSync(filename, {encoding: 'utf8'}).split('\n');
             
             // Read file content from both files
-            let firstFileContent = readFile(firstFileName);
-            let secondFileContent = readFile(secondFileName);
+            let firstFile = readFile(firstFileName);
+            let secondFile = readFile(secondFileName);
 
-            // If common elements exists
-            if (firstFileContent && secondFileContent) {
-                let row = 0;
+            let maxLength = Math.max(secondFile.length, secondFile.length);
+
+            if (firstFile && secondFile) {
+                let result = [];
+                let firstFileRow = 0;
+                let secondFileRow = 0;
                 let isFileEnd = false;
                 
-                // if its not file end, go to next row in the file
-                while (!isFileEnd) {
-                    if(firstFileContent[row] && secondFileContent[row]) {
+                while(!isFileEnd) {
+                    if (firstFile[firstFileRow] && secondFile[secondFileRow]) {
                         const splitRow = (row) => row.split(' ');
                         const sliceRow = (row, sliceFrom) => row.slice(sliceFrom);
                         
-                        let fileOneContent = splitRow(firstFileContent[row]);
-                        let fileTwoContent = splitRow(secondFileContent[row]);
+                        let fileOneContent = splitRow(firstFile[firstFileRow]);
+                        let fileTwoContent = splitRow(secondFile[secondFileRow]);
 
-                        if (program.firstfilestartposition > 1) {
-                            fileOneContent = sliceRow(fileOneContent, program.firstfilestartposition - 1);
-                        }
+                        let fileOneContentSliced, fileTwoContentSliced;
 
-                        if (program.secondfilestartposition > 1) {
-                            fileTwoContent = sliceRow(fileTwoContent, program.secondfilestartposition - 1);
-                        }
+                        fileOneContentSliced = program.firstfilestartposition > 1 ?
+                            sliceRow(fileOneContent, program.firstfilestartposition - 1) :
+                            fileOneContent; 
+
+                        fileTwoContentSliced = program.secondfilestartposition > 1 ?
+                            sliceRow(fileTwoContent, program.secondfilestartposition - 1) :
+                            fileTwoContent; 
 
                         let column = 0;
+                        let isRowEnd = false;
+                        
+                        while (!isRowEnd) {
+                            if (fileOneContentSliced[column] === fileTwoContentSliced[column]) {
+                                result.push(fileOneContentSliced[column]);
+                                column++;
 
-                        if (fileOneContent[column] === fileTwoContent[column]) {
-                            let result = [];
-                            let isFileRowEnd = false;
-        
-                            result.push(fileOneContent[column]);
-                            column++;
+                                const fileOne = fileOneContentSliced[column];
+                                const fileTwo = fileTwoContentSliced[column];
 
-                            // read each row
-                            while (!isFileRowEnd) {
-                                const fileOne = fileOneContent[column];
-                                const fileTwo = fileTwoContent[column];
+                                console.log('fileOne: ', fileOne);
+                                console.log('fileTwo: ', fileTwo);
 
                                 if (fileOne && fileTwo) {
                                     result.push(fileOne, fileTwo);
@@ -62,19 +66,20 @@ program
                                     result.push(fileTwo);
                                     column++;
                                 } else {
-                                    isFileRowEnd = true;
-                                    row++;
+                                    secondFileRow++;
+                                    isRowEnd = true;
                                 }
+                            } else {
+                                firstFileRow++;
+                                isRowEnd = true;
                             }
-        
-                            console.log(result.join(' '));
-                        } else {
-                            isFileEnd = true;
                         }
                     } else {
                         isFileEnd = true;
                     }
                 }
+
+                return result.length ? console.log(result.join(' ')) : console.log('Nothing could be joined');
             }
         } catch (err) {
             console.log(err.message)
