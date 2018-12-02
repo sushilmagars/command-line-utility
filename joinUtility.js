@@ -42,11 +42,11 @@ class JoinUtility {
     static process() {
         try {
             program
-            .arguments('<firstFileName>') 
-            .arguments('<secondFileName>')
-            .option('-1 firstfilestartposition <n>', 'integer', this.parseInteger, -1)
-            .option('-2 secondfilestartposition <n>', 'integer', this.parseInteger, -2)
-            .action(function(firstFileName, secondFileName) {
+				.arguments('<firstFileName>') 
+				.arguments('<secondFileName>')
+				.option('-1 firstfilestartposition <n>', 'integer', this.parseInteger, -1)
+				.option('-2 secondfilestartposition <n>', 'integer', this.parseInteger, -2)
+				.action(function(firstFileName, secondFileName) {
                     const readFile = (filename) => fs.readFileSync(filename, {encoding: 'utf8'}).split('\n');
                     
                     // Read file content from both files
