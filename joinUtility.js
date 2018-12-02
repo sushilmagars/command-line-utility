@@ -5,10 +5,17 @@ const fs = require('fs');
 class JoinUtility {
     constructor() {}
 
+    /**
+     * @function parseInteger
+     * @param {*} val 
+     * @param {*} field 
+     */
     static parseInteger(val, field) {
         if (Number.isNaN(Number.parseInt(val))) {
             throw new Error(`Position to read should be an integer after ${field}`);
         }
+
+        return Number.parseInt(val);
     }
 
     /**
@@ -119,7 +126,6 @@ class JoinUtility {
             .parse(process.argv);
         } catch (err) {
             console.log(err.message)
-            return err;
         }
     }
 }
